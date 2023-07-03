@@ -30,3 +30,15 @@ class Preprocess:
             if f(p[1]) is False:
                 word_list.append(p if without_tag is False else p[0])
         return word_list
+    
+    def get_wordidx_sequence(self, keywords):
+        if self.word_index is None:
+            return []
+        w2i = []
+        for word in keywords:
+            try:
+                w2i.append(self.word_index)[word]
+            except KeyError:
+                # 해당 언어가 사전에 없는 경우 OOV 처리
+                w2i.append(self.word_index['00V'])
+        return w2i
